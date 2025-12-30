@@ -1,26 +1,35 @@
-def vacuum_cleaner(loc,state):
-  if state[loc] == 'Dirty':
-        print(f"Room {loc} is Dirty")
-        print("Suck")
-        state[loc] = 'Clean'
-  else:
-        print(f"Room {loc} is Clean")
-        print("Move Right")
+# Vacuum Cleaner Agent with Location, Status and Percentage
 
-        if loc == 'A':
-            loc = 'B'
+def vacuum_cleaner():
+    location = 'A'
+    state = {'A': 'Dirty', 'B': 'Dirty'}
+    cleaned_count = 0
+    total_rooms = 2
+
+    print(f"{'Step':<5}{'Location':<10}{'Status':<15}{'Percent'}")
+    print("-" * 45)
+
+    for step in range(1, 5):
+
+        if state[location] == 'Dirty':
+            state[location] = 'Clean'
+            cleaned_count += 1
         else:
-            loc = 'A'
+            if location == 'A':
+                location = 'B'
+            else:
+                location = 'A'
 
-  return loc, state
+        # Overall status
+        if state['A'] == 'Clean' and state['B'] == 'Clean':
+            status = "Cleaned"
+        else:
+            status = "Not Cleaned"
 
-location = 'A'
-state = {
-    'A': 'Dirty',
-    'B': 'Dirty'
-}
+        # Performance percentage
+        percent = int((cleaned_count / total_rooms) * 100)
 
-for step in range(4):
-    print(f"\nStep {step + 1}")
-    location, state = vacuum_cleaner(location, state)
-    print("Current State:", state)
+        print(f"{step:<5}{location:<10}{status:<15}{percent}%")
+
+
+vacuum_cleaner()
