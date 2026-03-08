@@ -1,8 +1,6 @@
 import math
 
 board = [' ' for _ in range(9)]
-
-# Display board
 def print_board():
     print()
     for i in range(0,9,3):
@@ -10,8 +8,7 @@ def print_board():
         if i < 6:
             print("--+---+--")
     print()
-
-# Check winner
+    
 def check_winner(p):
     win = [[0,1,2],[3,4,5],[6,7,8],
            [0,3,6],[1,4,7],[2,5,8],
@@ -22,11 +19,9 @@ def check_winner(p):
             return True
     return False
 
-# Check draw
 def is_draw():
     return ' ' not in board
 
-# Minimax with trace
 def minimax(is_max, depth=0):
 
     if check_winner('O'):
@@ -56,7 +51,6 @@ def minimax(is_max, depth=0):
                 best = min(score, best)
         return best
 
-# Computer choosing move
 def best_move():
     best_score = -math.inf
     move = -1
@@ -81,8 +75,6 @@ def best_move():
 
     return move
 
-
-# Game loop
 while True:
 
     print_board()
